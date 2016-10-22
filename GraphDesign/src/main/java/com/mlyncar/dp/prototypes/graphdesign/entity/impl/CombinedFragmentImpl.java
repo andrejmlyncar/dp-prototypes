@@ -7,6 +7,8 @@ package com.mlyncar.dp.prototypes.graphdesign.entity.impl;
 
 import com.mlyncar.dp.prototypes.graphdesign.entity.CombinedFragment;
 import com.mlyncar.dp.prototypes.graphdesign.entity.CombinedFragmentType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -17,6 +19,7 @@ public class CombinedFragmentImpl implements CombinedFragment {
     private String name;
     private CombinedFragmentType combinedFragmentType;
     private String fragmentBody;
+    private final Logger logger = LoggerFactory.getLogger(CombinedFragmentImpl.class);
 
     public CombinedFragmentImpl(String name, CombinedFragmentType combinedFragmentType, String fragmentBody) {
         this.name = name;
@@ -52,6 +55,14 @@ public class CombinedFragmentImpl implements CombinedFragment {
     @Override
     public void setFragmentBody(String fragmentBody) {
         this.fragmentBody = fragmentBody;
+    }
+
+    @Override
+    public boolean isFragmentEqual(CombinedFragment combinedFragment) {
+        this.logger.debug("Checking equality of combined fragment {} with {} ", combinedFragment.getName(), this.getName());
+        return combinedFragment.getCombinedFragmentType().getCode().equals(this.getCombinedFragmentType().getCode())
+                && combinedFragment.getName().equals(this.getName())
+                && combinedFragment.getFragmentBody().equals(this.getFragmentBody());
     }
 
 }

@@ -114,19 +114,37 @@ public class NodeImpl implements Node {
     }
 
     @Override
+    public boolean isLeaf() {
+        return this.childNodes.isEmpty();
+    }
+
+    @Override
     public boolean isNodeEqual(Node node) {
         this.logger.debug("Comparing node {} and {}", node.getId(), this.getId());
         if (node.getName().equals(this.getName())) {
-            this.logger.debug("Name and Create message is equal");
-            return true;
+            if (node.getCreateMessage() != null) {
+                if (node.getCreateMessage().isMessageEqual(this.getCreateMessage())) {
+                    return compareCombinedFragments(node);
+                } else {
+                    return false;
+                }
+            }
+            return compareCombinedFragments(node);
         } else {
             this.logger.debug("Name and Create message is NOT equal");
             return false;
         }
     }
 
-    @Override
-    public boolean isLeaf() {
-        return this.childNodes.isEmpty();
+    private boolean compareCombinedFragments(Node node) {
+        int fragmentIndex = 0;
+        for (CombinedFragment fragment : combinedFragments()) {
+            if (fragment.isFragmentEqual(node.combinedFragments().get(fragmentIndex))) {
+                fragmentIndex++;
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 }

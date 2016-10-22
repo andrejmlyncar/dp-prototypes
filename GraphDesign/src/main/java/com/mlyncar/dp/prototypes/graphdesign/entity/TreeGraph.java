@@ -6,6 +6,8 @@ package com.mlyncar.dp.prototypes.graphdesign.entity;
  */
 public interface TreeGraph {
     
+    public String getTreeGraphId();
+    
     public Node getRootNode();
     
     public Integer getTreeDepth();

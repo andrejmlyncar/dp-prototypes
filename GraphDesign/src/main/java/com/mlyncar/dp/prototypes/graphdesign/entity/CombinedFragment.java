@@ -17,4 +17,6 @@ public interface CombinedFragment {
     public String getFragmentBody();
 
     public void setFragmentBody(String condition);
+    
+    public boolean isFragmentEqual(CombinedFragment combinedFragment);
 }
