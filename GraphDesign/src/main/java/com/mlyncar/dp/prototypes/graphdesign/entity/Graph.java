@@ -4,7 +4,7 @@ package com.mlyncar.dp.prototypes.graphdesign.entity;
  *
  * @author Andrej Mlyncar <a.mlyncar@gmail.com>
  */
-public interface TreeGraph {
+public interface Graph {
     
     public String getTreeGraphId();
     
