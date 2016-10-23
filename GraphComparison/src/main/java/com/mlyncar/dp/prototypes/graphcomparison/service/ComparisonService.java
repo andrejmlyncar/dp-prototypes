@@ -14,4 +14,6 @@ import com.mlyncar.dp.prototypes.graphdesign.entity.Graph;
 public interface ComparisonService {
     
     public void findSubTree(Graph referenceTree, Graph subTree);
+    
+    public ComparisonService getInstance();
 }
