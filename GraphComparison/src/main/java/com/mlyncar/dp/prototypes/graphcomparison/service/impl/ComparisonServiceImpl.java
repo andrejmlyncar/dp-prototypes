@@ -15,8 +15,6 @@ import com.mlyncar.dp.prototypes.graphdesign.entity.Node;
  */
 public class ComparisonServiceImpl implements ComparisonService {
 
-    private ComparisonService instance;
-
     @Override
     public void findSubTree(Graph referenceTree, Graph subTree) {
         Node rootReferenceNode = referenceTree.getRootNode();
@@ -25,6 +23,7 @@ public class ComparisonServiceImpl implements ComparisonService {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public boolean isSubTree(Node rootReferenceNode, Node rootSubTreeNode) {
 
         if (rootSubTreeNode == null) {
@@ -35,6 +34,9 @@ public class ComparisonServiceImpl implements ComparisonService {
         }
 
         if (rootReferenceNode.isNodeEqual(rootSubTreeNode)) {
+            if (rootReferenceNode.isLeaf()) {
+                return true;
+            }
             int childIndex = 0;
             for (Node referenceGraphChild : rootReferenceNode.childNodes()) {
                 if (!isSubTree(referenceGraphChild, rootSubTreeNode.childNodes().get(childIndex))) {
@@ -44,14 +46,6 @@ public class ComparisonServiceImpl implements ComparisonService {
             }
         }
         return rootReferenceNode.childNodes().stream().anyMatch((referenceGraphChild) -> (isSubTree(referenceGraphChild, rootSubTreeNode)));
-    }
-
-    @Override
-    public ComparisonService getInstance() {
-        if (instance == null) {
-            instance = new ComparisonServiceImpl();
-        }
-        return instance;
     }
 
 }
