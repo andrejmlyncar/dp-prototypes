@@ -71,6 +71,7 @@ public class SubTreeFindTest {
 
     @Test
     public void shouldFindOneNodeSubtreeInThreeNodeTree() {
+        System.out.println("RUNNING shouldFindOneNodeSubtreeInThreeNodeTree");
         ComparisonService service = new ComparisonServiceImpl();
         Message message = new MessageImpl("visitClassroom()", MessageType.SYNCH);
         Node node = new NodeImpl(UUID.randomUUID().toString(), message, null, "Classroom");
@@ -80,12 +81,14 @@ public class SubTreeFindTest {
 
     @Test
     public void shouldFindThreeNodeSubtreeInThreeNodeTree() {
+        System.out.println("RUNNING shouldFindThreeNodeSubtreeInThreeNodeTree");
         ComparisonService service = new ComparisonServiceImpl();
         assertTrue("One graph same as reference graph is not considered as subgraph", service.isGraphSubgraph(createThreeNodeGraph1(), createThreeNodeGraph1()));
     }
 
     @Test
     public void shouldFailsToFindOneNodeSubtreeInThreeNodeTree() {
+        System.out.println("RUNNING shouldFailsToFindOneNodeSubtreeInThreeNodeTree");
         ComparisonService service = new ComparisonServiceImpl();
         Message message = new MessageImpl("visitStudyDepartment()", MessageType.SYNCH);
         Node node = new NodeImpl(UUID.randomUUID().toString(), message, null, "StudyDepartment");
@@ -95,18 +98,21 @@ public class SubTreeFindTest {
 
     @Test
     public void shouldFailsToFindThreeNodeSubtreeInThreeNodeTree() {
+        System.out.println("RUNNING shouldFailsToFindThreeNodeSubtreeInThreeNodeTree");
         ComparisonService service = new ComparisonServiceImpl();
         assertFalse("Graph with three nodes is not subtree of three node tree even when same nodes are in reference graph", service.isGraphSubgraph(createThreeNodeGraph1(), createThreeNodeGraph2()));
     }
 
     @Test
     public void shouldFindThreeNodeSubtreeInFiveNodeTree() {
+        System.out.println("RUNNING shouldFindThreeNodeSubtreeInFiveNodeTree");
         ComparisonService service = new ComparisonServiceImpl();
         assertTrue("Graph with three nodes is not subtree even when it should be", service.isGraphSubgraph(createFiveNodeGraph(), createThreeNodeGraph1()));
     }
 
     @Test
     public void shouldFailsToFindThreeNodeSubtreeInFiveNodeTree() {
+        System.out.println("RUNNING shouldFailsToFindThreeNodeSubtreeInFiveNodeTree");
         ComparisonService service = new ComparisonServiceImpl();
         assertFalse("Graph with three nodes is considered as subtree even when it is not subtree", service.isGraphSubgraph(createFiveNodeGraph(), createThreeNodeGraph2()));
     }
