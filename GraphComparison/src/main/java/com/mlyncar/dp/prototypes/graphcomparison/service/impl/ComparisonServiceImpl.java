@@ -16,15 +16,13 @@ import com.mlyncar.dp.prototypes.graphdesign.entity.Node;
 public class ComparisonServiceImpl implements ComparisonService {
 
     @Override
-    public void findSubTree(Graph referenceTree, Graph subTree) {
+    public boolean isGraphSubgraph(Graph referenceTree, Graph subTree) {
         Node rootReferenceNode = referenceTree.getRootNode();
         Node rootSubTreeNode = subTree.getRootNode();
-
-        throw new UnsupportedOperationException("Not supported yet.");
+        return isSubTree(rootReferenceNode, rootSubTreeNode);
     }
 
-    @Override
-    public boolean isSubTree(Node rootReferenceNode, Node rootSubTreeNode) {
+    private boolean isSubTree(Node rootReferenceNode, Node rootSubTreeNode) {
 
         if (rootSubTreeNode == null) {
             return true;

@@ -6,7 +6,6 @@
 package com.mlyncar.dp.prototypes.graphcomparison.service;
 
 import com.mlyncar.dp.prototypes.graphdesign.entity.Graph;
-import com.mlyncar.dp.prototypes.graphdesign.entity.Node;
 
 /**
  *
@@ -14,7 +13,6 @@ import com.mlyncar.dp.prototypes.graphdesign.entity.Node;
  */
 public interface ComparisonService {
 
-    public void findSubTree(Graph referenceTree, Graph subTree);
+    public boolean isGraphSubgraph(Graph referenceTree, Graph subTree);
 
-    public boolean isSubTree(Node rootReferenceNode, Node rootSubTreeNode);
 }
