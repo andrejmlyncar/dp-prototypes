@@ -49,7 +49,7 @@ public class SubTreeFindTest {
         return graph;
     }
 
-    private Graph createFiveNodeGraph() {
+    private Graph createFiveNodeGraph1() {
         Node rootNode = new NodeImpl(UUID.randomUUID().toString(), null, null, "Teacher");
         Graph graph = new TreeGraph(rootNode);
         Message message1 = new MessageImpl("addAssignment()", MessageType.SYNCH);
@@ -59,6 +59,26 @@ public class SubTreeFindTest {
         Node node2 = new NodeImpl(UUID.randomUUID().toString(), message2, rootNode, "Classroom");
         rootNode.addChildNode(node1);
         rootNode.addChildNode(node2);
+        Message message3 = new MessageImpl("askTeacher()", MessageType.SYNCH);
+        Message message4 = new MessageImpl("visitClassroom()", MessageType.SYNCH);
+
+        Node node3 = new NodeImpl(UUID.randomUUID().toString(), message3, rootNode, "Teacher");
+        Node node4 = new NodeImpl(UUID.randomUUID().toString(), message4, rootNode, "Classroom");
+        node1.addChildNode(node3);
+        node1.addChildNode(node4);
+        return graph;
+    }
+
+    private Graph createFiveNodeGraph2() {
+        Node rootNode = new NodeImpl(UUID.randomUUID().toString(), null, null, "Teacher");
+        Graph graph = new TreeGraph(rootNode);
+        Message message1 = new MessageImpl("addAssignment()", MessageType.SYNCH);
+        Message message2 = new MessageImpl("teach()", MessageType.ASYNCH);
+
+        Node node1 = new NodeImpl(UUID.randomUUID().toString(), message1, rootNode, "Student");
+        Node node2 = new NodeImpl(UUID.randomUUID().toString(), message2, rootNode, "Classroom");
+        rootNode.addChildNode(node2);
+        rootNode.addChildNode(node1);
         Message message3 = new MessageImpl("askTeacher()", MessageType.SYNCH);
         Message message4 = new MessageImpl("visitClassroom()", MessageType.SYNCH);
 
@@ -107,13 +127,20 @@ public class SubTreeFindTest {
     public void shouldFindThreeNodeSubtreeInFiveNodeTree() {
         System.out.println("RUNNING shouldFindThreeNodeSubtreeInFiveNodeTree");
         ComparisonService service = new ComparisonServiceImpl();
-        assertTrue("Graph with three nodes is not subtree even when it should be", service.isGraphSubgraph(createFiveNodeGraph(), createThreeNodeGraph1()));
+        assertTrue("Graph with three nodes is not subtree even when it should be", service.isGraphSubgraph(createFiveNodeGraph1(), createThreeNodeGraph1()));
     }
 
     @Test
     public void shouldFailsToFindThreeNodeSubtreeInFiveNodeTree() {
         System.out.println("RUNNING shouldFailsToFindThreeNodeSubtreeInFiveNodeTree");
         ComparisonService service = new ComparisonServiceImpl();
-        assertFalse("Graph with three nodes is considered as subtree even when it is not subtree", service.isGraphSubgraph(createFiveNodeGraph(), createThreeNodeGraph2()));
+        assertFalse("Graph with three nodes is considered as subtree even when it is not subtree", service.isGraphSubgraph(createFiveNodeGraph1(), createThreeNodeGraph2()));
+    }
+
+    @Test
+    public void shouldFindThreeNodeSubtreeInFiveNodeTreeWhenSubtreeIsSecondLeaf() {
+        System.out.println("RUNNING shouldFindThreeNodeSubtreeInFiveNodeTree");
+        ComparisonService service = new ComparisonServiceImpl();
+        assertTrue("Graph with three nodes is not subtree even when it should be", service.isGraphSubgraph(createFiveNodeGraph2(), createThreeNodeGraph1()));
     }
 }
