@@ -25,9 +25,9 @@ public enum CombinedFragmentType {
     }
 
     public static CombinedFragmentType fromCode(String code) throws CombinedFragmentTypeException {
-        for (CombinedFragmentType reason : CombinedFragmentType.values()) {
-            if (reason.getCode().equals(code)) {
-                return reason;
+        for (CombinedFragmentType type : CombinedFragmentType.values()) {
+            if (type.getCode().equals(code)) {
+                return type;
             }
         }
         throw new CombinedFragmentTypeException("Unknown combined fragment type " + code);

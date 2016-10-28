@@ -26,9 +26,9 @@ public enum MessageType {
     }
 
     public static MessageType fromCode(String code) throws MessageTypeException {
-        for (MessageType reason : MessageType.values()) {
-            if (reason.getCode().equals(code)) {
-                return reason;
+        for (MessageType type : MessageType.values()) {
+            if (type.getCode().equals(code)) {
+                return type;
             }
         }
         throw new MessageTypeException("Unknown message type " + code);
