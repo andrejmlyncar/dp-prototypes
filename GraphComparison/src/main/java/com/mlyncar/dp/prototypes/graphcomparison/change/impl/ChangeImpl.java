@@ -1,7 +1,6 @@
 package com.mlyncar.dp.prototypes.graphcomparison.change.impl;
 
 import com.mlyncar.dp.prototypes.graphcomparison.change.Change;
-import com.mlyncar.dp.prototypes.graphcomparison.change.ChangeLevel;
 import com.mlyncar.dp.prototypes.graphcomparison.change.ChangeType;
 
 /**
@@ -10,9 +9,8 @@ import com.mlyncar.dp.prototypes.graphcomparison.change.ChangeType;
  */
 public class ChangeImpl implements Change {
 
-    private String elementId;
-    private ChangeType changeType;
-    private ChangeLevel changeLevel;
+    public String elementId;
+    public ChangeType changeType;
 
     public ChangeImpl(String elementId, ChangeType changeType) {
         this.elementId = elementId;
@@ -37,16 +35,6 @@ public class ChangeImpl implements Change {
     @Override
     public void setElementId(String elementId) {
         this.elementId = elementId;
-    }
-
-    @Override
-    public void setChangeLevel(ChangeLevel changeLevel) {
-        this.changeLevel = changeLevel;
-    }
-
-    @Override
-    public ChangeLevel getChangeLevel() {
-        return this.changeLevel;
     }
 
 }
