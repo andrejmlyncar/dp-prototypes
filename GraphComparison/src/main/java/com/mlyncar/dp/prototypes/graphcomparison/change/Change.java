@@ -14,4 +14,7 @@ public interface Change {
 
     public void setElementId(String elementId);
 
+    public void setChangeLevel(ChangeLevel changeLevel);
+
+    public ChangeLevel getChangeLevel();
 }
