@@ -5,7 +5,10 @@
  */
 package com.mlyncar.dp.prototypes.graphcomparison.service;
 
+import com.mlyncar.dp.prototypes.graphcomparison.change.Change;
+import com.mlyncar.dp.prototypes.graphcomparison.change.ChangeLog;
 import com.mlyncar.dp.prototypes.graphdesign.entity.Graph;
+import java.util.List;
 
 /**
  *
@@ -14,5 +17,9 @@ import com.mlyncar.dp.prototypes.graphdesign.entity.Graph;
 public interface ComparisonService {
 
     public boolean isGraphSubgraph(Graph referenceTree, Graph subTree);
+    
+    public ChangeLog getChangesInTwoGraphs(Graph referenceGraph, Graph subGraph);
+    
+    public List<Change> findChangesInGraph(Graph referenceTree, Graph subTree);
 
 }
