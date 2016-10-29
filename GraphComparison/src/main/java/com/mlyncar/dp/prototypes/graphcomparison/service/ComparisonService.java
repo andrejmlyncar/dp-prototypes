@@ -18,7 +18,7 @@ public interface ComparisonService {
 
     public boolean isGraphSubgraph(Graph referenceTree, Graph subTree);
     
-    public ChangeLog getChangesInTwoGraphs(Graph referenceGraph, Graph subGraph);
+    public ChangeLog getChangesInTwoGraphs(String referenceInteractionId, String subInteractionId);
     
     public List<Change> findChangesInGraph(Graph referenceTree, Graph subTree);
 

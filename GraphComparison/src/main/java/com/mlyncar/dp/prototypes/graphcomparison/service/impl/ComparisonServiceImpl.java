@@ -7,7 +7,10 @@ import com.mlyncar.dp.prototypes.graphcomparison.comparator.SubgraphComparator;
 import com.mlyncar.dp.prototypes.graphcomparison.service.ComparisonService;
 import com.mlyncar.dp.prototypes.graphdesign.entity.Graph;
 import com.mlyncar.dp.prototypes.graphdesign.entity.Node;
+import com.mlyncar.dp.prototypes.graphdesign.service.GraphCreator;
+import com.mlyncar.dp.prototypes.graphdesign.service.impl.GraphCreatorImpl;
 import java.util.List;
+import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +23,13 @@ public class ComparisonServiceImpl implements ComparisonService {
     private final Logger logger = LoggerFactory.getLogger(ComparisonServiceImpl.class);
 
     @Override
-    public ChangeLog getChangesInTwoGraphs(Graph referenceGraph, Graph subGraph) {
+    public ChangeLog getChangesInTwoGraphs(String referenceInteractionId, String subInteractionId) {
+        
+        GraphCreator creator = new GraphCreatorImpl();
+        //random uuid classes
+        Graph subGraph = creator.createGraphFromId(UUID.randomUUID().toString());  
+        Graph referenceGraph = creator.createGraphFromId(UUID.randomUUID().toString());
+        
         ChangeLog changeLog = new ChangeLogImpl(subGraph, referenceGraph);
         //No changes detected - just return changelog
         if (isGraphSubgraph(referenceGraph, subGraph)) {
