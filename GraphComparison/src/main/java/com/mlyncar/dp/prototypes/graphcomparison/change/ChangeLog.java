@@ -16,4 +16,9 @@ public interface ChangeLog {
     public void addChange(Change change);
 
     public List<Change> changes();
+    
+    public String getReferenceInteractionId();
+    
+    public String getSubInteractionId();
+    
 }

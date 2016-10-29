@@ -15,10 +15,14 @@ public class ChangeLogImpl implements ChangeLog {
     private final Graph referenceGraph;
     private final Graph subGraph;
     private final List<Change> changes = new ArrayList<>();
+    private final String referenceInteractionId;
+    private final String subInteractionId;
 
     public ChangeLogImpl(Graph subGraph, Graph referenceGraph) {
         this.referenceGraph = referenceGraph;
         this.subGraph = subGraph;
+        this.referenceInteractionId = referenceGraph.getTreeGraphId();
+        this.subInteractionId = subGraph.getTreeGraphId();
     }
 
     @Override
@@ -39,5 +43,15 @@ public class ChangeLogImpl implements ChangeLog {
     @Override
     public List<Change> changes() {
         return this.changes;
+    }
+
+    @Override
+    public String getReferenceInteractionId() {
+        return this.referenceInteractionId;
+    }
+
+    @Override
+    public String getSubInteractionId() {
+        return this.subInteractionId;
     }
 }
