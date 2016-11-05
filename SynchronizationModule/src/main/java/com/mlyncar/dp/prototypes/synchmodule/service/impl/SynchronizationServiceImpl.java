@@ -4,6 +4,9 @@ import com.mlyncar.dp.prototypes.graphcomparison.change.Change;
 import com.mlyncar.dp.prototypes.graphcomparison.change.ChangeLog;
 import com.mlyncar.dp.prototypes.graphcomparison.service.ComparisonService;
 import com.mlyncar.dp.prototypes.graphcomparison.service.impl.ComparisonServiceImpl;
+import com.mlyncar.dp.prototypes.synchmodule.config.PropertyLoader;
+import com.mlyncar.dp.prototypes.synchmodule.exception.ConfigurationException;
+import com.mlyncar.dp.prototypes.synchmodule.exception.SynchronizationException;
 import com.mlyncar.dp.prototypes.synchmodule.service.SynchronizationService;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +17,16 @@ import java.util.List;
  */
 public class SynchronizationServiceImpl implements SynchronizationService {
 
+    private PropertyLoader propertyLoader;
+
     @Override
-    public void synchInteractions(String referenceInteractionId, String subInteractionId) {
+    public void synchInteractions(String referenceInteractionId, String subInteractionId) throws SynchronizationException {
+        try {
+            this.propertyLoader = new PropertyLoader();
+        } catch (ConfigurationException ex) {
+            throw new SynchronizationException("Unable to start synchronization of interactions, configuration file was not loaded propertly", ex);
+        }
+
         ComparisonService comparisonService = new ComparisonServiceImpl();
 
         ChangeLog changelog = comparisonService.getChangesInTwoGraphs(referenceInteractionId, subInteractionId);
@@ -39,11 +50,11 @@ public class SynchronizationServiceImpl implements SynchronizationService {
     }
 
     private boolean shouldApplyChangesToUml(Change change) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Boolean.valueOf(this.propertyLoader.getProperty("synch.uml"));
     }
 
-    private boolean shouldApplyChangesToChangeLog(Change change) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    private Boolean shouldApplyChangesToChangeLog(Change change) {
+        return Boolean.valueOf(this.propertyLoader.getProperty("synch.changelog"));
     }
 
     private void applyChangesToUml(List<Change> changes, String interactionId) {
