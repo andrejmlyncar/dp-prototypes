@@ -1,6 +1,7 @@
 package com.mlyncar.dp.prototypes.graphcomparison.change;
 
 import com.mlyncar.dp.prototypes.graphdesign.entity.Graph;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -20,5 +21,7 @@ public interface ChangeLog {
     public String getReferenceInteractionId();
     
     public String getSubInteractionId();
+    
+    public Timestamp getChangeLogTimestamp();
     
 }
