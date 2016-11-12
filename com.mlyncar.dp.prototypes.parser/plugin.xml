@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="Sequence Diagram Synch"
+            id="com.mlyncar.dp.kdm.parser.commands.category">
+      </category>
+      <command
+            name="Synch Sequence Diagrams with Java Code"
+            categoryId="com.mlyncar.dp.kdm.parser.commands.category"
+            id="com.mlyncar.dp.kdm.parser.commands.sampleCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="com.mlyncar.dp.kdm.parser.commands.sampleCommandKdm"
+            class="com.mlyncar.dp.prototypes.parser.handlers.KdmSynchHandler">
+      </handler>
+      <handler
+            commandId="com.mlyncar.dp.kdm.parser.commands.sampleCommandUml"
+            class="com.mlyncar.dp.prototypes.parser.handlers.UmlSynchHandler">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="com.mlyncar.dp.kdm.parser.commands.sampleCommandKdm"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+6"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+      <key
+            commandId="com.mlyncar.dp.kdm.parser.commands.sampleCommandUml"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+7"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="Synchronization Menu"
+               mnemonic="M"
+               id="com.mlyncar.dp.kdm.parser.menus.sampleMenu">
+            <command
+            	  label="Execute KDM Analysis"
+                  commandId="com.mlyncar.dp.kdm.parser.commands.sampleCommandKdm"
+                  mnemonic="K"
+                  id="com.mlyncar.dp.kdm.parser.menus.sampleCommandKdm">
+            </command>
+            <command
+               	  label="Execute UML Analysis"
+                  commandId="com.mlyncar.dp.kdm.parser.commands.sampleCommandUml"
+                  mnemonic="U"
+                  id="com.mlyncar.dp.kdm.parser.menus.sampleCommandUml">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="com.mlyncar.dp.kdm.parser.toolbars.sampleToolbar">
+            <command
+                  commandId="com.mlyncar.dp.kdm.parser.commands.sampleCommandKdm"
+                  icon="icons/sample.gif"
+                  tooltip="Execute KDM analysis"
+                  id="com.mlyncar.dp.kdm.parser.toolbars.sampleCommandKdm">
+            </command>
+            <command
+                  commandId="com.mlyncar.dp.kdm.parser.commands.sampleCommandUml"
+                  icon="icons/sample.gif"
+                  tooltip="Execute KDM analysis"
+                  id="com.mlyncar.dp.kdm.parser.toolbars.sampleCommandUml">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+
+</plugin>
